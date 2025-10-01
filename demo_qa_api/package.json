@@ -1,0 +1,17 @@
+{
+  "name": "demo_qa_api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "cypress": "^15.3.0",
+    "cypress-ajv-schema-validator": "^2.0.2",
+    "cypress-plugin-api": "^1.8.0"
+  }
+}

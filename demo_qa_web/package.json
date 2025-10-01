@@ -1,0 +1,24 @@
+{
+  "name": "demo_qa_web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open",
+    "test:run": "npx cypress run",
+    "test:tag": "npx cypress open -e TAGS='@janela'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^23.2.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.6",
+    "cypress": "^15.3.0",
+    "esbuild": "^0.25.10"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "stepDefinitions": "cypress/e2e/step_definitions/*.js"
+  }
+}
