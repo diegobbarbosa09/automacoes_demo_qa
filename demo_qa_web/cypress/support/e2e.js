@@ -13,16 +13,11 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+    return false;
+});
+
 // Import commands.js using ES2015 syntax:
 import './commands'
+import 'cypress-file-upload'
 
-// Cypress.on('uncaught:exception', (err, runnable) => {
-//   if (
-//     err.message.includes("Unexpected token") ||
-//     err.message.includes("TypeError") ||
-//     err.message.includes("Uncaught") ||
-//     err.message.includes("Script error")
-//   ) {
-//     return false;
-//   }
-// });

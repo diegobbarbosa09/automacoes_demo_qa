@@ -2,6 +2,7 @@ import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 
 Given("que acesso o site Demo QA", () => {
+  cy.clearCookies();  
   cy.visit("/");
 });
 
@@ -14,23 +15,26 @@ Given("clico no submenu {string}", (submenu) => {
     cy.get('h1').should('have.text', submenu);
 });
 
-When("preencho todo o formulário com valores aleatórios", () => {
+When("preencho todo o formulário com valores aleatóriospreencho e submeto o formulário com dados válidos e um arquivo .txt", () => {
   cy.practiceForms();
-
-});
-
-When("faço upload de um arquivo .txt válido", () => {
-
-});
-
-When("submeto o formulário", () => {
-
 });
 
 When("crio um novo registro com dados válidos", () => {
     cy.get('#addNewRecordButton').click();
     cy.registrionForms();
+    cy.get('#app > div > div > div > div.col-12.mt-4.col-md-6 > h1').contains('Web Tables').should('be.visible');
 });
+
+When("edito o registro criado", () => {
+  cy.get('div.rt-tr-group .rt-td ').should('be.visible')
+  // .within(() => {
+  //   cy.get('xpath=//span[@title="Edit"]').click();
+  // });
+  // const userSalary = cy.get("#salary-wrapper #salary").should("exist");
+  // userSalary.should("be.visible").click({force: true});
+  // userSalary.invoke('val', '6500').trigger('input')
+  // cy.get("#submit").should("be.visible").click();
+})
 
 When('clico no botão browser {string}', (botao) => {
   cy.window().then((win) => {
@@ -55,12 +59,13 @@ When("paro a progress bar antes dos 25%", () => {
     stopButton.click({ force: true });
 });
 
-Then("devo ver que um popup foi aberto após o submit", () => {
 
+Then("devo ver que um popup foi aberto após o submit", () => {
+  cy.get('#example-modal-sizes-title-lg').invoke('text').should('eq', 'Thanks for submitting the form');
 });
 
 Then("fecho o popup", () => {
-
+  cy.get('#closeLargeModal').click();
 });
 
 Then('devo ver que uma nova janela foi aberta', () => {
