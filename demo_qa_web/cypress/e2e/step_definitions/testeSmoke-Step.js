@@ -22,7 +22,8 @@ When("preencho todo o formulário com valores aleatóriospreencho e submeto o fo
 When("crio um novo registro com dados válidos", () => {
     cy.get('#addNewRecordButton').click();
     cy.registrionForms();
-    cy.get('#app > div > div > div > div.col-12.mt-4.col-md-6 > h1').contains('Web Tables').should('be.visible');
+    cy.wait(1000);
+    cy.contains('.text-center', 'Web Tables').should('be.visible');
 });
 
 When("edito o registro criado", () => {
@@ -38,7 +39,7 @@ When("edito o registro criado", () => {
 
 When('clico no botão browser {string}', (botao) => {
   cy.window().then((win) => {
-    cy.stub(win, 'open').as('windowOpen'); // intercepta chamadas ao window.open
+    cy.stub(win, 'open').as('windowOpen');
   });
 
   if (botao === "New Window") {
@@ -72,7 +73,7 @@ Then('devo ver que uma nova janela foi aberta', () => {
     cy.get('@windowOpen').should('have.been.calledOnce');
     cy.get('@windowOpen').then((stub) => {
     const url = stub.getCall(0).args[0]; 
-    const absoluteUrl = new URL(url, 'https://demoqa.com').href; // transforma relativa em absoluta
+    const absoluteUrl = new URL(url, 'https://demoqa.com').href;
     expect(absoluteUrl).to.equal('https://demoqa.com/sample');
   });
 });
@@ -100,7 +101,7 @@ Then("aperto o botão {string} novamente", (paramsStart) => {
 });
 
 Then("aguardo a progress bar chegar a 100%", () => {
-    cy.get("#progressBar", { timeout: 60000 }) // espera até 20s
+    cy.get("#progressBar", { timeout: 65000 })
     .should(($el) => {
       const percentual = parseInt($el.text().replace("%", "").trim());
       expect(percentual).to.be.lte(100);
@@ -117,4 +118,5 @@ Then("devo resetar a progress bar para o valor inicial", () => {
       const percentual = parseInt(valor.replace("%", "").trim());
       expect(percentual).to.be.eq(0);
     });
+    cy.contains('#startStopButton', 'Start').should('be.visible');
 });

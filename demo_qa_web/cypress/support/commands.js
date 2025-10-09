@@ -74,7 +74,6 @@ Cypress.Commands.add("registrionForms", () => {
     const userDepartment = cy.get("#department-wrapper #department").should("exist");
     userDepartment.should("be.visible").click();
     userDepartment.invoke('val', 'Vendas').trigger('input')
-    const submitButton = cy.get("#submit").should("exist");
-    submitButton.should("be.visible").and("not.be.disabled");
+    const submitButton = cy.contains("#submit", 'Submit').should("be.visible").and("not.be.disabled");
     submitButton.click();
 });
