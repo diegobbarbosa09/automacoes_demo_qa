@@ -19,24 +19,24 @@ Feature: Execução de testes de teste de fumaça no site Demo QA
     Then  devo ver que uma nova janela foi aberta
     And   fecho a nova janela
 
-  @focus
+  # @focus
   Scenario: Criar, editar e deletar um registro na tabela
     Given escolho a opção "Elements" na página inicial
     And   clico no submenu "Web Tables"
     When  crio um novo registro com dados válidos
     And   edito o registro criado
-    Then  devo ver o registro atualizado na tabela
-    When  deleto o registro criado
-    Then  não devo ver mais o registro na tabela
+    And   devo ver o registro atualizado na tabela
+    Then  deleto o registro criado
+    And   não devo ver mais o registro na tabela
 
   # @focus
   Scenario: Criar e deletar múltiplos registros dinamicamente
     Given escolho a opção "Elements" na página inicial
     And   clico no submenu "Web Tables"
     When  crio 12 novos registros de forma dinâmica
-    Then  devo ver os 12 registros adicionados na tabela
-    When  deleto todos os registros criados
-    Then  não devo ver mais nenhum dos registros criados
+    And   devo ver os 12 registros adicionados na tabela
+    Then  deleto todos os novos registros criados
+    And   não devo ver mais nenhum dos registros criados
 
   # @focus
   Scenario: Controlar a Progress Bar até 25% e resetar no 100%
@@ -48,6 +48,13 @@ Feature: Execução de testes de teste de fumaça no site Demo QA
     When  aperto o botão "Start" novamente
     And   aguardo a progress bar chegar a 100%
     Then  devo resetar a progress bar para o valor inicial
+
+  # @focus
+  Scenario: Ordenação de elementos em sortable
+    Given escolho a opção "Interactions" na página inicial
+    And   clico no submenu "Sortable"
+    When  realizar o drag and drop em ordem decrescente
+    Then  deve vizualizar a ordenação decrescente em tela
 
 
 

@@ -25,22 +25,12 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add("practiceForms", (email, password) => {
-  const fisrtName = cy.get("#userName-wrapper #firstName").should("exist");
-  fisrtName.should("be.visible").click();
-  fisrtName.type("Antonio");
-  const lastName = cy.get("#userName-wrapper #lastName").should("exist");
-  lastName.should("be.visible").click();
-  lastName.type("Silva");
-  const userEmail = cy.get("#userEmail-wrapper #userEmail").should("exist");
-  userEmail.should("be.visible").click();
-  userEmail.type(`antonio.silva${Math.floor(Math.random() * 1000)}@email.com`);
+  cy.get("#userName-wrapper #firstName").should("be.visible").type("Antonio");
+  cy.get("#userName-wrapper #lastName").should("be.visible").type("Silva");
+  cy.get("#userEmail-wrapper #userEmail").should("be.visible").type(`antonio.silva${Math.floor(Math.random() * 1000)}@email.com`);
   cy.get("#genterWrapper #gender-radio-1").click({ force: true });
-  const userNumber = cy.get("#userNumber-wrapper #userNumber").should("exist");
-  userNumber.should("be.visible").click();
-  userNumber.type("1199999999");
-  const dateOfBirthInput = cy.get("#dateOfBirthInput").should("exist");
-  dateOfBirthInput.should("be.visible").click();
-  dateOfBirthInput.type("31/07/1965{enter}");
+  cy.get("#userNumber-wrapper #userNumber").should("be.visible").type("1199999999");
+  cy.get("#dateOfBirthInput").should("be.visible").type("31/07/1965{enter}");
   cy.get("#hobbiesWrapper #hobbies-checkbox-1").click({ force: true });
   cy.get("#hobbiesWrapper #hobbies-checkbox-3").click({ force: true });
   cy.get('.form-file #uploadPicture').attachFile('Teste_QA.txt');
@@ -56,24 +46,38 @@ Cypress.Commands.add("practiceForms", (email, password) => {
 });
 
 Cypress.Commands.add("registrionForms", () => {
-    const fisrtName = cy.get("#firstName").should("exist");
-    fisrtName.should("be.visible").click();
-    fisrtName.invoke('val', 'Antonio').trigger('input')
-    const lastName = cy.get("#lastName").should("exist");
-    lastName.should("be.visible").click();
-    lastName.invoke('val', 'Silva').trigger('input')
-    const userEmail = cy.get("#userEmail").should("exist");
-    userEmail.should("be.visible").click();
-    userEmail.invoke('val', `antonio.silva${Math.floor(Math.random() * 1000)}@email.com`).trigger('input')
-    const userAge = cy.get("#age-wrapper #age").should("exist");
-    userAge.should("be.visible").click();
-    userAge.invoke('val', '58').trigger('input')
-    const userSalary = cy.get("#salary-wrapper #salary").should("exist");
-    userSalary.should("be.visible").click();
-    userSalary.invoke('val', '6500').trigger('input')
-    const userDepartment = cy.get("#department-wrapper #department").should("exist");
-    userDepartment.should("be.visible").click();
-    userDepartment.invoke('val', 'Vendas').trigger('input')
-    const submitButton = cy.contains("#submit", 'Submit').should("be.visible").and("not.be.disabled");
-    submitButton.click();
+    cy.get("#firstName").should("be.visible").type('Antonio');
+    cy.get("#lastName").should("be.visible").type('Silva');
+    cy.get("#userEmail").should("be.visible").type(`antonio.silva${Math.floor(Math.random() * 1000)}@email.com`);
+    cy.get("#age-wrapper #age").should("be.visible").type('58');
+    cy.get("#salary-wrapper #salary").should("be.visible").type('6500');
+    cy.get("#department-wrapper #department").should("be.visible").type('Vendas');
+    cy.contains("#submit", 'Submit').should("be.visible").click();
 });
+
+Cypress.Commands.add("addUsers", (usuario) => {
+  cy.get("#firstName").should("be.visible").type(usuario.nome);
+  cy.get("#lastName").should("be.visible").type(usuario.sobrenome);
+  cy.get("#userEmail").should("be.visible").type(usuario.email);
+  cy.get("#age-wrapper #age").should("be.visible").type(usuario.idade);
+  cy.get("#salary-wrapper #salary").should("be.visible").type(usuario.salario);
+  cy.get("#department-wrapper #department").should("be.visible").type(usuario.departamento);
+  cy.get("#submit").should("be.visible").click();
+});
+
+Cypress.Commands.add("ordemDescres", () => {
+  cy.get('#demo-tabpane-list .list-group-item').eq(5).trigger('mousedown', { which: 1 });
+  cy.get('#demo-tabpane-list .list-group-item').eq(0).trigger('mousemove').trigger('mouseup', { force: true })
+
+  cy.get('#demo-tabpane-list .list-group-item').eq(5).trigger('mousedown', { which: 1 });
+  cy.get('#demo-tabpane-list .list-group-item').eq(1).trigger('mousemove').trigger('mouseup', { force: true })
+
+  cy.get('#demo-tabpane-list .list-group-item').eq(5).trigger('mousedown', { which: 1 });
+  cy.get('#demo-tabpane-list .list-group-item').eq(2).trigger('mousemove').trigger('mouseup', { force: true })
+
+  cy.get('#demo-tabpane-list .list-group-item').eq(5).trigger('mousedown', { which: 1 });
+  cy.get('#demo-tabpane-list .list-group-item').eq(3).trigger('mousemove').trigger('mouseup', { force: true })
+
+  cy.get('#demo-tabpane-list .list-group-item').eq(5).trigger('mousedown', { which: 1 });
+  cy.get('#demo-tabpane-list .list-group-item').eq(4).trigger('mousemove').trigger('mouseup', { force: true })
+})

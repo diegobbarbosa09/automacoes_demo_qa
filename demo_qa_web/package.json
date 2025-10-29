@@ -4,8 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cypress open",
-    "test:run": "npx cypress run",
-    "test:tag": "npx cypress open -e TAGS='@janela'"
+    "test:run": "npx cypress run"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +13,7 @@
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^23.2.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.6",
+    "@faker-js/faker": "^10.1.0",
     "cypress": "^15.3.0",
     "cypress-file-upload": "^5.0.8",
     "esbuild": "^0.25.10"
